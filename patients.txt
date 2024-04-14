@@ -1,0 +1,10 @@
+John Doe,1980-01-01,Acme Corporation,BlueCross BlueShield insurance
+Jane Doe,1985-02-02,GlobalTech Solutions,Aetna insurance
+Alice Smith,1990-03-03,United Industries,Allstate insurance
+Bob Johnson,1995-04-04,Innovative Services,State Farm insurance
+Charlie Brown,2000-05-05,Express Logistics,Progressive insurance
+Diana Prince,2005-06-06,Meridian Inc.,Geico insurance
+David Lee,1978-07-07,First National Bank,Prudential insurance
+Emily Taylor,1983-08-08,Summit Healthcare,MetLife insurance
+Michael Anderson,1992-09-09,Green Energy Co.,Liberty Mutual insurance
+Sarah Clark,1997-10-10,Apex Financial Services,UnitedHealthcare insurance
