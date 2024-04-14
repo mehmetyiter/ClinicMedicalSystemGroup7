@@ -1,29 +1,10 @@
-Doctor Name: John Smith
-Patient Name: Lisa Davis
-Age: 45
-Medication: Aspirin
-Description: Headache relief
-
-Doctor Name: Emily Johnson
-Patient Name: Robert Parker
-Age: 55
-Medication: Antibiotics
-Description: Infection treatment
-
-Doctor Name: Olivia Martinez
-Patient Name: Alice Thompson
-Age: 30
-Medication: Ibuprofen
-Description: Pain relief
-
-Doctor Name: William Davis
-Patient Name: Sarah White
-Age: 28
-Medication: Cough syrup
-Description: Respiratory infection
-
-Doctor Name: Lucas Garcia
-Patient Name: Michael Brown
-Age: 40
-Medication: Antihistamine
-Description: Allergy relief
+Emily Stone, John Doe, Aspirin, Headache
+Olivia Martinez, Jane Doe, Antibiotics, Infection
+William Davis, Alice Smith, Ibuprofen, Pain Relief
+Lucas Garcia, Bob Johnson, Cough Syrup, Respiratory Infection
+Sophia Johnson, Charlie Brown, Antihistamine, Allergy Relief
+Ethan Wilson, Diana Prince, Calcium Supplements, Bone Health
+Ava Anderson, David Lee, Beta Blockers, Heart Condition Management
+Noah Thompson, Emily Taylor, Insulin, Diabetes Management
+Mia Rodriguez, Michael Anderson, Antidepressants, Mental Health Support
+Emily Stone, Sarah Clark, Cholesterol Pills, Cholesterol Management

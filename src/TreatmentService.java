@@ -39,50 +39,54 @@ public class TreatmentService {
 
     public static void displayAllTreatments() {
         if (treatments.isEmpty()) {
-            System.out.println("No treatments recorded.");
+            System.out.println("No treatments are recorded.");
         } else {
             System.out.println("Recorded Treatments:");
             for (Treatment treatment : treatments) {
-                System.out.printf("Doctor: %s\nPatient: %s\nMedication: %s\nDescription: %s\n\n",
+                System.out.println("--------------------------------------");
+                System.out.printf("Doctor: %s\nPatient: %s\nMedication: %s\nDescription: %s\n",
                                   treatment.getDoctorName(), treatment.getPatientName(),
                                   treatment.getMedication(), treatment.getDescription());
+                System.out.println("--------------------------------------\n");
             }
         }
     }
 
     public static void searchTreatmentsByPatientName(Scanner scanner) {
         System.out.println("Enter patient's name to search:");
-        String patientName = scanner.nextLine();
-
+        String patientName = scanner.nextLine().trim();
+    
         boolean found = false;
         for (Treatment treatment : treatments) {
-            if (treatment.getPatientName().equals(patientName)) {
+            // Compare names with trimming and ignoring case
+            if (treatment.getPatientName().trim().equalsIgnoreCase(patientName)) {
                 System.out.printf("Doctor: %s\nPatient: %s\nMedication: %s\nDescription: %s\n\n",
                                   treatment.getDoctorName(), treatment.getPatientName(),
                                   treatment.getMedication(), treatment.getDescription());
                 found = true;
             }
         }
-
+    
         if (!found) {
             System.out.println("No treatments found for patient: " + patientName);
         }
     }
-
+    
     public static void searchTreatmentsByDoctorName(Scanner scanner) {
         System.out.println("Enter doctor's name to search:");
-        String doctorName = scanner.nextLine();
-
+        String doctorName = scanner.nextLine().trim();
+    
         boolean found = false;
         for (Treatment treatment : treatments) {
-            if (treatment.getDoctorName().equals(doctorName)) {
+            // Compare names with trimming and ignoring case
+            if (treatment.getDoctorName().trim().equalsIgnoreCase(doctorName)) {
                 System.out.printf("Doctor: %s\nPatient: %s\nMedication: %s\nDescription: %s\n\n",
                                   treatment.getDoctorName(), treatment.getPatientName(),
                                   treatment.getMedication(), treatment.getDescription());
                 found = true;
             }
         }
-
+    
         if (!found) {
             System.out.println("No treatments found for doctor: " + doctorName);
         }

@@ -13,25 +13,10 @@ public class PatientService {
     public static void registerNewPatient(Scanner scanner) {
         System.out.println("Enter patient's first name:");
         String firstName = scanner.nextLine().trim();
-        if (firstName.isEmpty()) {
-            System.out.println("First name cannot be empty.");
-            return;
-        }
-
         System.out.println("Enter patient's last name:");
         String lastName = scanner.nextLine().trim();
-        if (lastName.isEmpty()) {
-            System.out.println("Last name cannot be empty.");
-            return;
-        }
-
         System.out.println("Enter patient's birth date (YYYY-MM-DD):");
         String birthDate = scanner.nextLine().trim();
-        if (!birthDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            System.out.println("Invalid date format. Please use YYYY-MM-DD.");
-            return;
-        }
-
         System.out.println("Enter patient's employer:");
         String employer = scanner.nextLine().trim();
         System.out.println("Enter patient's insurance company:");
@@ -40,7 +25,7 @@ public class PatientService {
         Patient patient = new Patient(firstName, lastName, birthDate, employer, insurance);
         patients.add(patient);
         savePatientsToFile();
-
+        
         System.out.println("Patient registered successfully!");
     }
 
@@ -50,13 +35,16 @@ public class PatientService {
         } else {
             System.out.println("Registered Patients:");
             for (Patient patient : patients) {
+                System.out.println("--------------------------------------");
                 System.out.printf("Name: %s %s\n", patient.getFirstName(), patient.getLastName());
                 System.out.printf("Birth Date: %s\n", patient.getBirthDate());
                 System.out.printf("Employer: %s\n", patient.getEmployer());
-                System.out.printf("Insurance: %s\n\n", patient.getInsurance());
+                System.out.printf("Insurance: %s\n", patient.getInsurance());
+                System.out.println("--------------------------------------\n");
             }
         }
     }
+    
 
     public static void modifyPatient(Scanner scanner) {
         System.out.println("Enter patient's last name to modify:");
@@ -94,7 +82,7 @@ public class PatientService {
         }
     }
 
-    public static void savePatientsToFile() {
+    private static void savePatientsToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("patients.txt", false))) {
             for (Patient patient : patients) {
                 writer.println(patient.getFirstName() + "," +
@@ -110,20 +98,26 @@ public class PatientService {
     }
 
     private static void loadPatientsFromFile() {
-        File file = new File("patients.txt");
+        System.out.println("Loading patients from file...");
+        File file = new File("D:\\FSD12\\Programing 2\\Project\\ClinicMedicalSystemGroup7\\ClinicMedicalSystemGroup7\\patients.txt");
         if (file.exists()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
+                int count = 0;
                 while ((line = reader.readLine()) != null) {
                     String[] data = line.split(",");
                     if (data.length == 5) {
                         Patient patient = new Patient(data[0], data[1], data[2], data[3], data[4]);
                         patients.add(patient);
+                        count++;
                     }
                 }
+                System.out.println(count + " patients loaded.");
             } catch (IOException e) {
                 System.out.println("Error loading patients from file: " + e.getMessage());
             }
+        } else {
+            System.out.println("No file found at specified path.");
         }
     }
 }

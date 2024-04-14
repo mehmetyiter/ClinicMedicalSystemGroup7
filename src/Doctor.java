@@ -16,6 +16,7 @@ public class Doctor {
     // Getters
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
+    public String getFullName() {return "Dr. " + firstName + " " + lastName;}
     public String getBirthDate() { return birthDate; }
     public String getEmployedDate() { return employedDate; }
     public String getSpecialty() { return specialty; }
