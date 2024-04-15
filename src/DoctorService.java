@@ -4,14 +4,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DoctorService {
+    // List to store doctors
     private static List<Doctor> doctors = new ArrayList<>();
 
+    // Static block to load doctor data on startup
     static {
-        loadDoctorsFromFile(); // Load doctor data on startup
+        loadDoctorsFromFile();
     }
+
+    // Method to return a copy of the list of doctors to prevent external modifications
     public static List<Doctor> getDoctors() {
-        return new ArrayList<>(doctors);  // Return a copy of the list to prevent external modifications
+        return new ArrayList<>(doctors);
     }
+
+    // Method to register a new doctor
     public static void registerNewDoctor(Scanner scanner) {
         System.out.println("Enter doctor's first name:");
         String firstName = scanner.nextLine().trim();
@@ -54,6 +60,7 @@ public class DoctorService {
         System.out.println("Doctor registered successfully!");
     }
 
+    // Method to modify a doctor's record
     public static void modifyDoctor(Scanner scanner) {
         System.out.println("Enter doctor's last name to modify:");
         String lastName = scanner.nextLine();
@@ -70,6 +77,7 @@ public class DoctorService {
         System.out.println("Doctor not found with last name: " + lastName);
     }
 
+    // Method to delete a doctor's record
     public static void deleteDoctor(Scanner scanner) {
         System.out.println("Enter doctor's last name to delete:");
         String lastName = scanner.nextLine();
@@ -88,6 +96,7 @@ public class DoctorService {
         }
     }
 
+    // Method to display all doctors
     public static void displayAllDoctors() {
         if (doctors.isEmpty()) {
             System.out.println("No doctors are registered.");
@@ -103,6 +112,7 @@ public class DoctorService {
         }
     }
 
+    // Method to load doctors from file
     private static void loadDoctorsFromFile() {
         System.out.println("Loading doctors from file...");
         File file = new File("doctors.txt");
@@ -114,13 +124,14 @@ public class DoctorService {
                     String[] data = line.split(",");
                     if (data.length == 5) {
                         try {
+                            // Extract doctor details from the line
                             String firstName = data[0].trim();
                             String lastName = data[1].trim();
                             String birthDate = data[2].trim();
                             String employedDate = data[3].trim();
                             String specialty = data[4].trim();
                             
-                            // Validate date formats or other data criteria here if needed
+                            // Create a new Doctor object and add it to the list
                             Doctor doctor = new Doctor(firstName, lastName, birthDate, employedDate, specialty);
                             doctors.add(doctor);
                             count++;
@@ -140,9 +151,11 @@ public class DoctorService {
         }
     }
 
+    // Method to save doctors to file
     private static void saveDoctorsToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("doctors.txt", false))) {
             for (Doctor doctor : doctors) {
+                // Write doctor details to file
                 writer.println(doctor.getFirstName() + "," +
                                doctor.getLastName() + "," +
                                doctor.getBirthDate() + "," +
