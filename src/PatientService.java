@@ -12,49 +12,29 @@ public class PatientService {
         loadPatientsFromFile();
     }
 
-<<<<<<< HEAD
-    public static void registerNewPatient(Scanner scanner) {System.out.println("Enter patient's last name to modify:");
-    String lastName = scanner.nextLine();
-    for (Patient patient : patients) {
-        if (patient.getLastName().equals(lastName)) {
-            System.out.println("Modifying details for: " + patient);
-            System.out.println("Enter new first name (current: " + patient.getFirstName() + "):"); 
-            patient.setFirstName(scanner.nextLine());
-            System.out.println("Enter new last name (current: " + patient.getLastName() + "):");
-            patient.setLastName(scanner.nextLine());
-            System.out.println("Enter new birth date (current: " + patient.getBirthDate() + "):");
-            patient.setBirthDate(scanner.nextLine());
-            System.out.println("Enter new employer (current: " + patient.getEmployer() + "):");
-            patient.setEmployer(scanner.nextLine());
-            System.out.println("Enter new insurance company (current: " + patient.getInsurance() + "):");
-            patient.setInsurance(scanner.nextLine());
-            savePatientsToFile();
-            System.out.println("Details updated successfully!");
-            return;
-        }
-=======
-    // Method to register a new patient
     public static void registerNewPatient(Scanner scanner) {
-        System.out.println("Enter patient's first name:");
-        String firstName = scanner.nextLine().trim();
-        System.out.println("Enter patient's last name:");
-        String lastName = scanner.nextLine().trim();
-        System.out.println("Enter patient's birth date (YYYY-MM-DD):");
-        String birthDate = scanner.nextLine().trim();
-        System.out.println("Enter patient's employer:");
-        String employer = scanner.nextLine().trim();
-        System.out.println("Enter patient's insurance company:");
-        String insurance = scanner.nextLine().trim();
+        System.out.println("Enter patient's last name to modify:");
+        String lastName = scanner.nextLine();
+        for (Patient patient : patients) {
+            if (patient.getLastName().equals(lastName)) {
+                System.out.println("Modifying details for: " + patient);
+                System.out.println("Enter new first name (current: " + patient.getFirstName() + "):");
+                patient.setFirstName(scanner.nextLine());
+                System.out.println("Enter new last name (current: " + patient.getLastName() + "):");
+                patient.setLastName(scanner.nextLine());
+                System.out.println("Enter new birth date (current: " + patient.getBirthDate() + "):");
+                patient.setBirthDate(scanner.nextLine());
+                System.out.println("Enter new employer (current: " + patient.getEmployer() + "):");
+                patient.setEmployer(scanner.nextLine());
+                System.out.println("Enter new insurance company (current: " + patient.getInsurance() + "):");
+                patient.setInsurance(scanner.nextLine());
+                savePatientsToFile();
+                System.out.println("Details updated successfully!");
+                return;
+            }
+        }
 
-        // Create a new patient object and add it to the list
-        Patient patient = new Patient(firstName, lastName, birthDate, employer, insurance);
-        patients.add(patient);
-        savePatientsToFile(); // Save patient data to file
-        System.out.println("Patient registered successfully!");
->>>>>>> 99d370e5d19960184ab37e46c42dc6938b9ef13a
     }
-    System.out.println("Patient not found!");
-}
 
     // Method to display all registered patients
     public static void displayAllPatients() {
@@ -73,7 +53,8 @@ public class PatientService {
         }
     }
 
-    //modify patient details, if users wants to cancel all changes any part of modify steps  with implement cancel options
+    // modify patient details, if users wants to cancel all changes any part of
+    // modify steps with implement cancel options
     public static void modifyPatient(Scanner scanner) {
         System.out.println("Enter patient's last name to modify:");
         String lastName = scanner.nextLine();
@@ -97,7 +78,7 @@ public class PatientService {
         }
         System.out.println("Patient not found!");
     }
-        
+
     // Method to delete a patient
     public static void deletePatient(Scanner scanner) {
         System.out.println("Enter patient's last name to delete:");
@@ -122,10 +103,10 @@ public class PatientService {
         try (PrintWriter writer = new PrintWriter(new FileWriter("patients.txt", false))) {
             for (Patient patient : patients) {
                 writer.println(patient.getFirstName() + "," +
-                               patient.getLastName() + "," +
-                               patient.getBirthDate() + "," +
-                               patient.getEmployer() + "," +
-                               patient.getInsurance());
+                        patient.getLastName() + "," +
+                        patient.getBirthDate() + "," +
+                        patient.getEmployer() + "," +
+                        patient.getInsurance());
             }
             System.out.println("Patients saved to file successfully!");
         } catch (IOException e) {
