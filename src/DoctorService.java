@@ -63,10 +63,12 @@ public class DoctorService {
 
     // Method to modify a doctor's record
     public static void modifyDoctor(Scanner scanner) {
-        System.out.println("Enter doctor's last name to modify:");
-        String lastName = scanner.nextLine();
+        System.out.println("Enter doctor's first name:");
+        String firstName = scanner.nextLine();
+        System.out.println("Enter doctor's last name:");
+        String lastName = scanner.nextLine();    
         for (Doctor doctor : doctors) {
-            if (doctor.getLastName().equals(lastName)) {
+            if (doctor.getFirstName().equalsIgnoreCase(firstName) && doctor.getLastName().equalsIgnoreCase(lastName)) {
                 System.out.println("Modifying details for: Dr. " + doctor.getFirstName() + " " + doctor.getLastName());
                 System.out.println("Enter new first name (current: " + doctor.getFirstName() + "):");
                 doctor.setFirstName(scanner.nextLine());
@@ -89,11 +91,13 @@ public class DoctorService {
 
     // Method to delete a doctor's record
     public static void deleteDoctor(Scanner scanner) {
-        System.out.println("Enter doctor's last name to delete:");
-        String lastName = scanner.nextLine();
+    System.out.println("Enter doctor's first name:");
+    String firstName = scanner.nextLine();
+    System.out.println("Enter doctor's last name:");
+    String lastName = scanner.nextLine();
         boolean found = false;
         for (Doctor doctor : doctors) {
-            if (doctor.getLastName().equals(lastName)) {
+            if  (doctor.getFirstName().equals(firstName) && doctor.getLastName().equals(lastName)) {
                 doctors.remove(doctor);
                 saveDoctorsToFile();
                 System.out.println("Doctor deleted successfully!");
@@ -102,7 +106,7 @@ public class DoctorService {
             }
         }
         if (!found) {
-            System.out.println("Doctor not found with last name: " + lastName);
+            System.out.println("Doctor not found with name: " + firstName + " " + lastName);
         }
     }
 

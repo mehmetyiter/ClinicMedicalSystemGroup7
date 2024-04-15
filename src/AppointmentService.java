@@ -123,7 +123,7 @@ public class AppointmentService {
 
     // Method to modify an appointment
     public static void modifyAppointment(Scanner scanner) {
-        System.out.println("Enter the patient's name for the appointment to modify:");
+        System.out.println("Enter the patient's full name for the appointment to modify:");
         String patientName = scanner.nextLine();
 
         for (Appointment appointment : appointments) {
@@ -148,7 +148,7 @@ public class AppointmentService {
 
     // Method to delete an appointment
     public static void deleteAppointment(Scanner scanner) {
-        System.out.println("Enter the patient's name for the appointment to delete:");
+        System.out.println("Enter the patient's full name for the appointment to delete:");
         String patientName = scanner.nextLine();
 
         // Remove the appointment if found
