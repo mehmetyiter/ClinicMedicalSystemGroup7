@@ -4,12 +4,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PatientService {
+    // List to store patient objects
     private static List<Patient> patients = new ArrayList<>();
 
+    // Static block to load patient data from file on startup
     static {
-        loadPatientsFromFile(); // Load patient data on startup
+        loadPatientsFromFile();
     }
 
+    // Method to register a new patient
     public static void registerNewPatient(Scanner scanner) {
         System.out.println("Enter patient's first name:");
         String firstName = scanner.nextLine().trim();
@@ -22,13 +25,14 @@ public class PatientService {
         System.out.println("Enter patient's insurance company:");
         String insurance = scanner.nextLine().trim();
 
+        // Create a new patient object and add it to the list
         Patient patient = new Patient(firstName, lastName, birthDate, employer, insurance);
         patients.add(patient);
-        savePatientsToFile();
-        
+        savePatientsToFile(); // Save patient data to file
         System.out.println("Patient registered successfully!");
     }
 
+    // Method to display all registered patients
     public static void displayAllPatients() {
         if (patients.isEmpty()) {
             System.out.println("No patients are registered.");
@@ -44,8 +48,8 @@ public class PatientService {
             }
         }
     }
-    
 
+    // Method to modify details of a patient
     public static void modifyPatient(Scanner scanner) {
         System.out.println("Enter patient's last name to modify:");
         String lastName = scanner.nextLine();
@@ -56,7 +60,7 @@ public class PatientService {
                 patient.setEmployer(scanner.nextLine());
                 System.out.println("Enter new insurance company (current: " + patient.getInsurance() + "):");
                 patient.setInsurance(scanner.nextLine());
-                savePatientsToFile();
+                savePatientsToFile(); // Save changes to file
                 System.out.println("Details updated successfully!");
                 return;
             }
@@ -64,6 +68,7 @@ public class PatientService {
         System.out.println("Patient not found!");
     }
 
+    // Method to delete a patient
     public static void deletePatient(Scanner scanner) {
         System.out.println("Enter patient's last name to delete:");
         String lastName = scanner.nextLine();
@@ -72,7 +77,7 @@ public class PatientService {
             if (patients.get(i).getLastName().equals(lastName)) {
                 patients.remove(i);
                 found = true;
-                savePatientsToFile();
+                savePatientsToFile(); // Save changes to file
                 System.out.println("Patient deleted successfully!");
                 break;
             }
@@ -82,6 +87,7 @@ public class PatientService {
         }
     }
 
+    // Method to save patient data to file
     private static void savePatientsToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("patients.txt", false))) {
             for (Patient patient : patients) {
@@ -97,9 +103,10 @@ public class PatientService {
         }
     }
 
+    // Method to load patient data from file
     private static void loadPatientsFromFile() {
         System.out.println("Loading patients from file...");
-        File file = new File("D:\\FSD12\\Programing 2\\Project\\ClinicMedicalSystemGroup7\\ClinicMedicalSystemGroup7\\patients.txt");
+        File file = new File("patients.txt");
         if (file.exists()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;

@@ -1,10 +1,12 @@
 public class Patient {
+    // Instance variables
     private String firstName;
     private String lastName;
     private String birthDate;
     private String employer;
     private String insurance;
 
+    // Constructor to initialize the Patient object
     public Patient(String firstName, String lastName, String birthDate, String employer, String insurance) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,6 +29,7 @@ public class Patient {
     public void setEmployer(String employer) { this.employer = employer; }
     public void setInsurance(String insurance) { this.insurance = insurance; }
 
+    // Override toString() method to provide a string representation of the Patient object
     @Override
     public String toString() {
         return "Patient{" +
