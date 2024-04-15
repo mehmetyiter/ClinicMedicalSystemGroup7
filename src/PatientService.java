@@ -10,24 +10,28 @@ public class PatientService {
         loadPatientsFromFile(); // Load patient data on startup
     }
 
-    public static void registerNewPatient(Scanner scanner) {
-        System.out.println("Enter patient's first name:");
-        String firstName = scanner.nextLine().trim();
-        System.out.println("Enter patient's last name:");
-        String lastName = scanner.nextLine().trim();
-        System.out.println("Enter patient's birth date (YYYY-MM-DD):");
-        String birthDate = scanner.nextLine().trim();
-        System.out.println("Enter patient's employer:");
-        String employer = scanner.nextLine().trim();
-        System.out.println("Enter patient's insurance company:");
-        String insurance = scanner.nextLine().trim();
-
-        Patient patient = new Patient(firstName, lastName, birthDate, employer, insurance);
-        patients.add(patient);
-        savePatientsToFile();
-        
-        System.out.println("Patient registered successfully!");
+    public static void registerNewPatient(Scanner scanner) {System.out.println("Enter patient's last name to modify:");
+    String lastName = scanner.nextLine();
+    for (Patient patient : patients) {
+        if (patient.getLastName().equals(lastName)) {
+            System.out.println("Modifying details for: " + patient);
+            System.out.println("Enter new first name (current: " + patient.getFirstName() + "):"); 
+            patient.setFirstName(scanner.nextLine());
+            System.out.println("Enter new last name (current: " + patient.getLastName() + "):");
+            patient.setLastName(scanner.nextLine());
+            System.out.println("Enter new birth date (current: " + patient.getBirthDate() + "):");
+            patient.setBirthDate(scanner.nextLine());
+            System.out.println("Enter new employer (current: " + patient.getEmployer() + "):");
+            patient.setEmployer(scanner.nextLine());
+            System.out.println("Enter new insurance company (current: " + patient.getInsurance() + "):");
+            patient.setInsurance(scanner.nextLine());
+            savePatientsToFile();
+            System.out.println("Details updated successfully!");
+            return;
+        }
     }
+    System.out.println("Patient not found!");
+}
 
     public static void displayAllPatients() {
         if (patients.isEmpty()) {
@@ -45,24 +49,40 @@ public class PatientService {
         }
     }
     
-
+    //modify patient details, if users wants to cancel all changes any part of modify steps, implement cancel options
     public static void modifyPatient(Scanner scanner) {
         System.out.println("Enter patient's last name to modify:");
         String lastName = scanner.nextLine();
-        for (Patient patient : patients) {
-            if (patient.getLastName().equals(lastName)) {
-                System.out.println("Modifying details for: " + patient);
-                System.out.println("Enter new employer (current: " + patient.getEmployer() + "):");
-                patient.setEmployer(scanner.nextLine());
-                System.out.println("Enter new insurance company (current: " + patient.getInsurance() + "):");
-                patient.setInsurance(scanner.nextLine());
+        boolean found = false;
+        for (int i = 0; i < patients.size(); i++) {
+            if (patients.get(i).getLastName().equals(lastName)) {
+                System.out.println("Enter new first name:");
+                String firstName = scanner.nextLine().trim();
+                System.out.println("Enter new last name:");
+                String newLastName = scanner.nextLine().trim();
+                System.out.println("Enter new birth date (YYYY-MM-DD):");
+                String birthDate = scanner.nextLine().trim();
+                System.out.println("Enter new employer:");
+                String employer = scanner.nextLine().trim();
+                System.out.println("Enter new insurance company:");
+                String insurance = scanner.nextLine().trim();
+                
+                patients.get(i).setFirstName(firstName);
+                patients.get(i).setLastName(newLastName);
+                patients.get(i).setBirthDate(birthDate);
+                patients.get(i).setEmployer(employer);
+                patients.get(i).setInsurance(insurance);
                 savePatientsToFile();
-                System.out.println("Details updated successfully!");
-                return;
+                System.out.println("Patient modified successfully!");
+                found = true;
+                break;
             }
         }
-        System.out.println("Patient not found!");
+        if (!found) {
+            System.out.println("Patient not found!");
+        }
     }
+        
 
     public static void deletePatient(Scanner scanner) {
         System.out.println("Enter patient's last name to delete:");
