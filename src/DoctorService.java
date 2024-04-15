@@ -21,39 +21,15 @@ public class DoctorService {
     // Method to register a new doctor
     public static void registerNewDoctor(Scanner scanner) {
         System.out.println("Enter doctor's first name:");
-        String firstName = scanner.nextLine().trim();
-        if (firstName.isEmpty()) {
-            System.out.println("First name cannot be empty.");
-            return;
-        }
-
+        String firstName = scanner.nextLine();
         System.out.println("Enter doctor's last name:");
-        String lastName = scanner.nextLine().trim();
-        if (lastName.isEmpty()) {
-            System.out.println("Last name cannot be empty.");
-            return;
-        }
-
-        System.out.println("Enter doctor's date of birth (YYYY-MM-DD):");
-        String birthDate = scanner.nextLine().trim();
-        if (!birthDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            System.out.println("Invalid date format. Please use YYYY-MM-DD.");
-            return;
-        }
-
+        String lastName = scanner.nextLine();
+        System.out.println("Enter doctor's birth date (MM/DD/YYYY):");
+        String birthDate = scanner.nextLine();
         System.out.println("Enter doctor's employment date (YYYY-MM-DD):");
-        String employedDate = scanner.nextLine().trim();
-        if (!employedDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            System.out.println("Invalid date format. Please use YYYY-MM-DD.");
-            return;
-        }
-
+        String employedDate = scanner.nextLine();
         System.out.println("Enter doctor's specialty:");
-        String specialty = scanner.nextLine().trim();
-        if (specialty.isEmpty()) {
-            System.out.println("Specialty cannot be empty.");
-            return;
-        }
+        String specialty = scanner.nextLine();
 
         Doctor doctor = new Doctor(firstName, lastName, birthDate, employedDate, specialty);
         doctors.add(doctor);
@@ -72,10 +48,8 @@ public class DoctorService {
                 doctor.setFirstName(scanner.nextLine());
                 System.out.println("Enter new last name (current: " + doctor.getLastName() + "):");
                 doctor.setLastName(scanner.nextLine());
-                System.out.println("Enter new date of birth (YYYY-MM-DD) (current: " + doctor.getBirthDate() + "):");
-                doctor.setBirthDate(scanner.nextLine());
-                System.out
-                        .println("Enter new employment date (YYYY-MM-DD) (current: " + doctor.getEmployedDate() + "):");
+              
+                System.out.println("Enter new employment date (YYYY-MM-DD) (current: " + doctor.getEmployedDate() + "):");
                 doctor.setEmployedDate(scanner.nextLine());
                 System.out.println("Enter new specialty (current: " + doctor.getSpecialty() + "):");
                 doctor.setSpecialty(scanner.nextLine());
@@ -124,40 +98,16 @@ public class DoctorService {
 
     // Method to load doctors from file
     private static void loadDoctorsFromFile() {
-        System.out.println("Loading doctors from file...");
-        File file = new File("doctors.txt");
-        if (file.exists()) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                String line;
-                int count = 0;
-                while ((line = reader.readLine()) != null) {
-                    String[] data = line.split(",");
-                    if (data.length == 5) {
-                        try {
-                            // Extract doctor details from the line
-                            String firstName = data[0].trim();
-                            String lastName = data[1].trim();
-                            String birthDate = data[2].trim();
-                            String employedDate = data[3].trim();
-                            String specialty = data[4].trim();
-
-                            // Create a new Doctor object and add it to the list
-                            Doctor doctor = new Doctor(firstName, lastName, birthDate, employedDate, specialty);
-                            doctors.add(doctor);
-                            count++;
-                        } catch (Exception e) {
-                            System.out.println("Error parsing doctor data: " + e.getMessage() + " in line: " + line);
-                        }
-                    } else {
-                        System.out.println("Skipping improperly formatted line: " + line);
-                    }
-                }
-                System.out.println(count + " doctors loaded.");
-            } catch (IOException e) {
-                System.out.println("Error loading doctors from file: " + e.getMessage());
+        try (BufferedReader reader = new BufferedReader(new FileReader("doctors.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                Doctor doctor = new Doctor(data[0], data[1], data[2], data[3], data[4]);
+                doctors.add(doctor);
             }
-        } else {
-            System.out.println("No file found at the specified path: " + file.getAbsolutePath());
+            System.out.println("Doctors loaded from file successfully!");
+        } catch (IOException e) {
+            System.out.println("Error loading doctors from file: " + e.getMessage());
         }
     }
 

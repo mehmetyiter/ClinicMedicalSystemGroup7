@@ -6,14 +6,11 @@ import java.util.Scanner;
 public class TreatmentService {
     private static List<Treatment> treatments = new ArrayList<>();
 
-    // Load treatment data on startup
     static {
-        loadTreatmentsFromFile();
+        loadTreatmentsFromFile(); // Load treatment data on startup
     }
 
-    // Method to create a new treatment
     public static void createNewTreatment(Scanner scanner) {
-        // Input treatment details
         System.out.println("Creating a new treatment record:");
         System.out.println("Enter patient's name:");
         String patientName = scanner.nextLine().trim();
@@ -21,25 +18,25 @@ public class TreatmentService {
             System.out.println("Patient name cannot be empty.");
             return;
         }
+
         System.out.println("Enter doctor's name:");
         String doctorName = scanner.nextLine().trim();
         if (doctorName.isEmpty()) {
             System.out.println("Doctor name cannot be empty.");
             return;
         }
+
         System.out.println("Enter medication:");
         String medication = scanner.nextLine().trim();
         System.out.println("Enter treatment description:");
         String description = scanner.nextLine().trim();
 
-        // Create and add new treatment
         Treatment treatment = new Treatment(doctorName, patientName, medication, description);
         treatments.add(treatment);
         saveTreatmentsToFile();
         System.out.println("Treatment created successfully!");
     }
 
-    // Method to display all treatments
     public static void displayAllTreatments() {
         if (treatments.isEmpty()) {
             System.out.println("No treatments are recorded.");
@@ -55,89 +52,105 @@ public class TreatmentService {
         }
     }
 
-    // Method to search treatments by patient name
     public static void searchTreatmentsByPatientName(Scanner scanner) {
         System.out.println("Enter patient's name to search:");
         String patientName = scanner.nextLine().trim();
-
+    
         boolean found = false;
         for (Treatment treatment : treatments) {
             // Compare names with trimming and ignoring case
             if (treatment.getPatientName().trim().equalsIgnoreCase(patientName)) {
+                System.out.println("\n__________________________");
                 System.out.printf("Doctor: %s\nPatient: %s\nMedication: %s\nDescription: %s\n\n",
                                   treatment.getDoctorName(), treatment.getPatientName(),
                                   treatment.getMedication(), treatment.getDescription());
+                System.out.println("__________________________\n");
                 found = true;
             }
         }
-
+    
         if (!found) {
             System.out.println("No treatments found for patient: " + patientName);
         }
     }
-
-    // Method to search treatments by doctor name
+    
     public static void searchTreatmentsByDoctorName(Scanner scanner) {
         System.out.println("Enter doctor's name to search:");
         String doctorName = scanner.nextLine().trim();
-
+    
         boolean found = false;
         for (Treatment treatment : treatments) {
             // Compare names with trimming and ignoring case
             if (treatment.getDoctorName().trim().equalsIgnoreCase(doctorName)) {
+                System.out.println("\n__________________________");
                 System.out.printf("Doctor: %s\nPatient: %s\nMedication: %s\nDescription: %s\n\n",
                                   treatment.getDoctorName(), treatment.getPatientName(),
                                   treatment.getMedication(), treatment.getDescription());
+                System.out.println("__________________________\n");
                 found = true;
             }
         }
-
+    
         if (!found) {
             System.out.println("No treatments found for doctor: " + doctorName);
         }
     }
 
-    // Method to modify a treatment
     public static void modifyTreatment(Scanner scanner) {
         System.out.println("Enter patient's name for the treatment to modify:");
-        String patientName = scanner.nextLine();
-
+        String patientName = scanner.nextLine().trim();
+    
+        boolean found = false;
         for (Treatment treatment : treatments) {
-            if (treatment.getPatientName().equals(patientName)) {
+            // Using equalsIgnoreCase to avoid case sensitivity issues
+            if (treatment.getPatientName().trim().equalsIgnoreCase(patientName)) {
+                found = true;
                 System.out.println("Modifying treatment record for: " + treatment);
-                System.out.println("Enter new medication (current: " + treatment.getMedication() + "):");
-                treatment.setMedication(scanner.nextLine());
-                System.out.println("Enter new description (current: " + treatment.getDescription() + "):");
-                treatment.setDescription(scanner.nextLine());
+                System.out.println("Current Medication: " + treatment.getMedication());
+                System.out.println("Enter new medication:");
+                String newMedication = scanner.nextLine().trim();
+                treatment.setMedication(newMedication.isEmpty() ? treatment.getMedication() : newMedication);
+    
+                System.out.println("Current Description: " + treatment.getDescription());
+                System.out.println("Enter new description:");
+                String newDescription = scanner.nextLine().trim();
+                treatment.setDescription(newDescription.isEmpty() ? treatment.getDescription() : newDescription);
+    
                 saveTreatmentsToFile();
                 System.out.println("Treatment record updated successfully!");
-                return;
-            }
-        }
-        System.out.println("Treatment record not found!");
-    }
-
-    // Method to delete a treatment
-    public static void deleteTreatment(Scanner scanner) {
-        System.out.println("Enter patient's name for the treatment to delete:");
-        String patientName = scanner.nextLine();
-
-        boolean found = false;
-        for (int i = 0; i < treatments.size(); i++) {
-            if (treatments.get(i).getPatientName().equals(patientName)) {
-                treatments.remove(i);
-                found = true;
-                saveTreatmentsToFile();
-                System.out.println("Treatment record deleted successfully!");
                 break;
             }
         }
+        
         if (!found) {
             System.out.println("Treatment record not found!");
         }
     }
+    
+    // Method to delete a treatment record with trim method
+    public static void deleteTreatment(Scanner scanner) {
+        System.out.println("Enter patient's name for the treatment to delete:");
+        String patientName = scanner.nextLine().trim();
+    
+        Treatment foundTreatment = null;
+        for (Treatment treatment : treatments) {
+            // Using equalsIgnoreCase to avoid case sensitivity issues
+            if (treatment.getPatientName().trim().equalsIgnoreCase(patientName)) {
+                foundTreatment = treatment;
+                break;
+            }
+        }
+    
+        if (foundTreatment != null) {
+            treatments.remove(foundTreatment);
+            saveTreatmentsToFile();
+            System.out.println("Treatment record deleted successfully!");
+        } else {
+            System.out.println("Treatment record not found!");
+        }
+    }
+    
 
-    // Method to save treatments to file
     private static void saveTreatmentsToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("treatments.txt", false))) {
             for (Treatment treatment : treatments) {
@@ -152,7 +165,6 @@ public class TreatmentService {
         }
     }
 
-    // Method to load treatments from file
     private static void loadTreatmentsFromFile() {
         File file = new File("treatments.txt");
         if (file.exists()) {

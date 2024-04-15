@@ -18,6 +18,8 @@ public class Patient {
     // Getters
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
+    //get patient name method
+    public String getPatientName() { return firstName + " " + lastName; }
     public String getBirthDate() { return birthDate; }
     public String getEmployer() { return employer; }
     public String getInsurance() { return insurance; }
@@ -25,6 +27,7 @@ public class Patient {
     // Setters
     public void setFirstName(String firstName) { this.firstName = firstName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
+    public void setPatientName(String firstName, String lastName) {this.firstName = firstName;this.lastName = lastName;}
     public void setBirthDate(String birthDate) { this.birthDate = birthDate; }
     public void setEmployer(String employer) { this.employer = employer; }
     public void setInsurance(String insurance) { this.insurance = insurance; }
