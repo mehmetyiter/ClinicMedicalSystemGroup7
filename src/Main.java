@@ -2,9 +2,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        boolean quit = false;
+        Scanner scanner = new Scanner(System.in); // Scanner object for user input
+        boolean quit = false; // Flag to control program termination
 
+        // Main menu loop
         while (!quit) {
             System.out.println("\nMAIN MENU");
             System.out.println("Choose one of the following options (enter a number):");
@@ -15,24 +16,25 @@ public class Main {
             System.out.println("5. Quit");
 
             System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
+            int choice = scanner.nextInt(); // Read user choice
             scanner.nextLine();  // Consume newline
 
+            // Switch statement to handle different menu options
             switch (choice) {
                 case 1:
-                    MenuController.displayPatientMenu(scanner);
+                    MenuController.displayPatientMenu(scanner); // Display patient menu
                     break;
                 case 2:
-                    MenuController.displayDoctorMenu(scanner);
+                    MenuController.displayDoctorMenu(scanner); // Display doctor menu
                     break;
                 case 3:
-                    MenuController.displayAppointmentMenu(scanner);
+                    MenuController.displayAppointmentMenu(scanner); // Display appointment menu
                     break;
                 case 4:
-                    MenuController.displayTreatmentMenu(scanner);
+                    MenuController.displayTreatmentMenu(scanner); // Display treatment menu
                     break;
                 case 5:
-                    quit = true;
+                    quit = true; // Exit the program
                     System.out.println("Exiting the program...");
                     break;
                 default:
@@ -40,6 +42,6 @@ public class Main {
                     break;
             }
         }
-        scanner.close();
+        scanner.close(); // Close the scanner to release resources
     }
 }

@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class AppointmentMenu {
+    // Method to display the appointment menu and handle user input
     public static void displayAppointmentMenu(Scanner scanner) {
         boolean exit = false;
         while (!exit) {
@@ -14,9 +15,10 @@ public class AppointmentMenu {
             System.out.println("7. Return to main menu");
 
             System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
+            int choice = scanner.nextInt(); // Read user choice
+            scanner.nextLine();  // Consume newline after reading integer input
 
+            // Switch statement to perform actions based on user choice
             switch (choice) {
                 case 1:
                     AppointmentService.createNewAppointment(scanner);
@@ -37,7 +39,7 @@ public class AppointmentMenu {
                     AppointmentService.deleteAppointment(scanner);
                     break;
                 case 7:
-                    exit = true;
+                    exit = true; // Exit the loop and return to main menu
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
