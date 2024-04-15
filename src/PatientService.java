@@ -51,10 +51,13 @@ public class PatientService {
 
     //modify patient details, if users wants to cancel all changes any part of modify steps  with implement cancel options
     public static void modifyPatient(Scanner scanner) {
-        System.out.println("Enter patient's last name to modify:");
-        String lastName = scanner.nextLine();
+        System.out.println("Enter patient's first name:");
+        String firstName = scanner.nextLine();
+        System.out.println("Enter patient's last name:");
+        String lastName = scanner.nextLine();    
+
         for (Patient patient : patients) {
-            if (patient.getLastName().equals(lastName)) {
+            if (patient.getFirstName().equalsIgnoreCase(firstName) && patient.getLastName().equalsIgnoreCase(lastName)) {
                 System.out.println("Modifying details for: " + patient);
                 System.out.println("Enter new first name (current: " + patient.getFirstName() + "):");
                 patient.setFirstName(scanner.nextLine());
@@ -71,25 +74,27 @@ public class PatientService {
                 return;
             }
         }
-        System.out.println("Patient not found!");
+        System.out.println("Patient not found with name: " + firstName + " " + lastName);
     }
         
     // Method to delete a patient
     public static void deletePatient(Scanner scanner) {
-        System.out.println("Enter patient's last name to delete:");
-        String lastName = scanner.nextLine();
+        System.out.println("Enter patient's first name:");
+        String firstName = scanner.nextLine();
+        System.out.println("Enter patient's last name:");
+        String lastName = scanner.nextLine();    
         boolean found = false;
-        for (int i = 0; i < patients.size(); i++) {
-            if (patients.get(i).getLastName().equals(lastName)) {
-                patients.remove(i);
-                found = true;
+        for (Patient patient : patients) {
+            if (patient.getFirstName().equalsIgnoreCase(firstName) && patient.getLastName().equalsIgnoreCase(lastName)) {
+                patients.remove(patient);
                 savePatientsToFile(); // Save changes to file
                 System.out.println("Patient deleted successfully!");
+                found = true;
                 break;
             }
         }
         if (!found) {
-            System.out.println("Patient not found!");
+            System.out.println("Patient not found with name: " + firstName + " " + lastName);
         }
     }
 

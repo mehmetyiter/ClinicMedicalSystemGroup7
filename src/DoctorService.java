@@ -60,7 +60,7 @@ public class DoctorService {
                 return;
             }
         }
-        System.out.println("Doctor not found with last name: " + lastName);
+        System.out.println("Doctor not found with name: " + firstName + " " + lastName);
     }
 
     // Method to delete a doctor's record
@@ -71,7 +71,7 @@ public class DoctorService {
     String lastName = scanner.nextLine();
         boolean found = false;
         for (Doctor doctor : doctors) {
-            if  (doctor.getFirstName().equals(firstName) && doctor.getLastName().equals(lastName)) {
+            if  (doctor.getFirstName().equalsIgnoreCase(firstName) && doctor.getLastName().equalsIgnoreCase(lastName)) {
                 doctors.remove(doctor);
                 saveDoctorsToFile();
                 System.out.println("Doctor deleted successfully!");
