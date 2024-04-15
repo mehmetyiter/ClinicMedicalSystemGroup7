@@ -76,7 +76,7 @@ public class AppointmentService {
 
     // Method to search appointments by patient name
     public static void searchAppointmentsByPatientName(Scanner scanner) {
-        System.out.println("Enter patient's name to search:");
+        System.out.println("Enter patient's full name to search:");
         String patientName = scanner.nextLine();
 
         boolean found = false;
@@ -97,7 +97,7 @@ public class AppointmentService {
 
     // Method to search appointments by doctor name
     public static void searchAppointmentsByDoctorName(Scanner scanner) {
-        System.out.println("Enter doctor's name to search:");
+        System.out.println("Enter doctor's full name to search:");
         String doctorName = scanner.nextLine();
 
         boolean found = false;
@@ -118,7 +118,7 @@ public class AppointmentService {
 
     // Method to modify an appointment
     public static void modifyAppointment(Scanner scanner) {
-        System.out.println("Enter the patient's name for the appointment to modify:");
+        System.out.println("Enter the patient's full name for the appointment to modify:");
         String patientName = scanner.nextLine();
 
         for (Appointment appointment : appointments) {

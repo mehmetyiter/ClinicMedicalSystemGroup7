@@ -1,10 +1,14 @@
-Emily Stone, John Doe, Aspirin, Headache
-Olivia Martinez, Jane Doe, Antibiotics, Infection
-William Davis, Alice Smith, Ibuprofen, Pain Relief
-Lucas Garcia, Bob Johnson, Cough Syrup, Respiratory Infection
-Sophia Johnson, Charlie Brown, Antihistamine, Allergy Relief
-Ethan Wilson, Diana Prince, Calcium Supplements, Bone Health
-Ava Anderson, David Lee, Beta Blockers, Heart Condition Management
-Noah Thompson, Emily Taylor, Insulin, Diabetes Management
-Mia Rodriguez, Michael Anderson, Antidepressants, Mental Health Support
-Emily Stone, Sarah Clark, Cholesterol Pills, Cholesterol Management
+ John Doe,Emily Stone, Aspirin, Headache
+ Jane Doe,Olivia Martinez, Antibiotics, Infection
+ Alice Smith,William Davis, Ibuprofen, Pain Relief
+ Bob Johnson,Lucas Garcia, Cough Syrup, Respiratory Infection
+ Charlie Brown,Sophia Johnson, Antihistamine, Allergy Relief
+ Diana Prince,Ethan Wilson, Calcium Supplements, Bone Health
+ David Lee,Ava Anderson, Beta Blockers, Heart Condition Management
+ Emily Taylor,Noah Thompson, Insulin, Diabetes Management
+ Michael Anderson,Mia Rodriguez, Antidepressants, Mental Health Support
+ Sarah Clark,Emily Stone, Cholesterol Pills, Cholesterol Management
+Mem,Doc,A,B
+Qiutian Wang,Anala,Aspirin,aa
+Qiutian Wang,Olivia Martinez,jj,kk
+Emily Stone,Qiu Wang,kk,kkk
