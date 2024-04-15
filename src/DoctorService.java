@@ -12,7 +12,8 @@ public class DoctorService {
         loadDoctorsFromFile();
     }
 
-    // Method to return a copy of the list of doctors to prevent external modifications
+    // Method to return a copy of the list of doctors to prevent external
+    // modifications
     public static List<Doctor> getDoctors() {
         return new ArrayList<>(doctors);
     }
@@ -67,6 +68,15 @@ public class DoctorService {
         for (Doctor doctor : doctors) {
             if (doctor.getLastName().equals(lastName)) {
                 System.out.println("Modifying details for: Dr. " + doctor.getFirstName() + " " + doctor.getLastName());
+                System.out.println("Enter new first name (current: " + doctor.getFirstName() + "):");
+                doctor.setFirstName(scanner.nextLine());
+                System.out.println("Enter new last name (current: " + doctor.getLastName() + "):");
+                doctor.setLastName(scanner.nextLine());
+                System.out.println("Enter new date of birth (YYYY-MM-DD) (current: " + doctor.getBirthDate() + "):");
+                doctor.setBirthDate(scanner.nextLine());
+                System.out
+                        .println("Enter new employment date (YYYY-MM-DD) (current: " + doctor.getEmployedDate() + "):");
+                doctor.setEmployedDate(scanner.nextLine());
                 System.out.println("Enter new specialty (current: " + doctor.getSpecialty() + "):");
                 doctor.setSpecialty(scanner.nextLine());
                 saveDoctorsToFile();
@@ -130,7 +140,7 @@ public class DoctorService {
                             String birthDate = data[2].trim();
                             String employedDate = data[3].trim();
                             String specialty = data[4].trim();
-                            
+
                             // Create a new Doctor object and add it to the list
                             Doctor doctor = new Doctor(firstName, lastName, birthDate, employedDate, specialty);
                             doctors.add(doctor);
@@ -157,10 +167,10 @@ public class DoctorService {
             for (Doctor doctor : doctors) {
                 // Write doctor details to file
                 writer.println(doctor.getFirstName() + "," +
-                               doctor.getLastName() + "," +
-                               doctor.getBirthDate() + "," +
-                               doctor.getEmployedDate() + "," +
-                               doctor.getSpecialty());
+                        doctor.getLastName() + "," +
+                        doctor.getBirthDate() + "," +
+                        doctor.getEmployedDate() + "," +
+                        doctor.getSpecialty());
             }
             System.out.println("Doctors saved to file successfully!");
         } catch (IOException e) {
