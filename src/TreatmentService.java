@@ -125,7 +125,7 @@ public class TreatmentService {
             // Using equalsIgnoreCase to avoid case sensitivity issues
             if (treatment.getPatientName().trim().equalsIgnoreCase(patientName)) {
                 found = true;
-                System.out.println("Modifying treatment record for: " + treatment);
+                System.out.println("Modifying treatment record for: " + treatment.getPatientName());
                 System.out.println("Current Medication: " + treatment.getMedication());
                 System.out.println("Enter new medication:");
                 String newMedication = scanner.nextLine().trim();
