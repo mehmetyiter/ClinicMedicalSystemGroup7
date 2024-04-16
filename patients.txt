@@ -6,4 +6,3 @@ Charlie,Brown,2000-05-05,Express Logistics,Progressive insurance
 Diana,Prince,2005-06-06,Meridian Inc.,Geico insurance
 David,Lee,1978-07-07,First National Bank,Prudential insurance
 Emily,Taylor,1983-08-08,Summit Healthcare,MetLife insurance
-,,,,

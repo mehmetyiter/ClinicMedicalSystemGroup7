@@ -72,49 +72,55 @@ public class TreatmentService {
     }
 
     public static void searchTreatmentsByPatientName(Scanner scanner) {
-        System.out.println("Enter patient's full name to search:");
-        String patientName = scanner.nextLine().trim();
-
+        System.out.println("Enter patient's full name or part of it to search:");
+        String inputName = scanner.nextLine().trim().toLowerCase();
+    
         boolean found = false;
         for (Treatment treatment : treatments) {
-            // Compare names with trimming and ignoring case
-            if (treatment.getPatientName().trim().equalsIgnoreCase(patientName)) {
-                System.out.println("\n__________________________");
-                System.out.printf("Patient: %s\nDoctor: %s\nMedication: %s\nDescription: %s\n\n",
-                        treatment.getPatientName(), treatment.getDoctorName(),
-                        treatment.getMedication(), treatment.getDescription());
-                System.out.println("__________________________\n");
-                found = true;
+            String[] patientFullName = treatment.getPatientName().toLowerCase().split(" ");
+            for (String namePart : patientFullName) {
+                if (namePart.contains(inputName)) {
+                    System.out.println("\n__________________________");
+                    System.out.printf("Patient: %s\nDoctor: %s\nMedication: %s\nDescription: %s\n\n",
+                                      treatment.getPatientName(), treatment.getDoctorName(),
+                                      treatment.getMedication(), treatment.getDescription());
+                    System.out.println("__________________________\n");
+                    found = true;
+                    break;
+                }
             }
         }
-
+    
         if (!found) {
-            System.out.println("No treatments found for patient: " + patientName);
+            System.out.println("No treatments found for patient: " + inputName);
         }
     }
 
     public static void searchTreatmentsByDoctorName(Scanner scanner) {
-        System.out.println("Enter doctor's full name to search:");
-        String doctorName = scanner.nextLine().trim();
-
+        System.out.println("Enter doctor's full name or part of it to search:");
+        String inputName = scanner.nextLine().trim().toLowerCase();
+    
         boolean found = false;
         for (Treatment treatment : treatments) {
-            // Compare names with trimming and ignoring case
-            if (treatment.getDoctorName().trim().equalsIgnoreCase(doctorName)) {
-                System.out.println("\n__________________________");
-                System.out.printf("Patient: %s\nDoctor: %s\nMedication: %s\nDescription: %s\n\n",
-                        treatment.getPatientName(), treatment.getDoctorName(),
-                        treatment.getMedication(), treatment.getDescription());
-                System.out.println("__________________________\n");
-                found = true;
+            String[] doctorFullName = treatment.getDoctorName().toLowerCase().split(" ");
+            for (String namePart : doctorFullName) {
+                if (namePart.contains(inputName)) {
+                    System.out.println("\n__________________________");
+                    System.out.printf("Patient: %s\nDoctor: %s\nMedication: %s\nDescription: %s\n\n",
+                                      treatment.getPatientName(), treatment.getDoctorName(),
+                                      treatment.getMedication(), treatment.getDescription());
+                    System.out.println("__________________________\n");
+                    found = true;
+                    break;
+                }
             }
         }
-
+    
         if (!found) {
-            System.out.println("No treatments found for doctor: " + doctorName);
+            System.out.println("No treatments found for doctor: " + inputName);
         }
     }
-
+  
     public static void modifyTreatment(Scanner scanner) {
         System.out.println("Enter patient's full name for the treatment to modify:");
         String patientName = scanner.nextLine().trim();
