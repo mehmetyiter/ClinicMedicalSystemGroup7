@@ -81,7 +81,7 @@ public class AppointmentService {
 
         boolean found = false;
         for (Appointment appointment : appointments) {
-            if (appointment.getPatientName().equals(patientName)) {
+            if (appointment.getPatientName().equalsIgnoreCase(patientName)) {
                 System.out.println("--------------------------------------");
                 System.out.printf("Patient Name: %s\nDoctor Name: %s\nDate: %s\nTime: %s\n\n",
                                   appointment.getPatientName(), appointment.getDoctorName(),
@@ -102,7 +102,7 @@ public class AppointmentService {
 
         boolean found = false;
         for (Appointment appointment : appointments) {
-            if (appointment.getDoctorName().equals(doctorName)) {
+            if (appointment.getDoctorName().equalsIgnoreCase(doctorName)) {
                 System.out.println("--------------------------------------");
                 System.out.printf("Patient Name: %s\nDoctor Name: %s\nDate: %s\nTime: %s\n\n",
                                   appointment.getPatientName(), appointment.getDoctorName(),
@@ -122,10 +122,12 @@ public class AppointmentService {
         String patientName = scanner.nextLine();
 
         for (Appointment appointment : appointments) {
-            if (appointment.getPatientName().equals(patientName)) {
+            if (appointment.getPatientName().equalsIgnoreCase(patientName)) {
                 System.out.println("Modifying appointment for: " + patientName);
+                System.out.println("Current appointment date: " + appointment.getDate());
                 System.out.println("Enter the new appointment date (YYYY-MM-DD):");
                 String newDate = scanner.nextLine();
+                System.out.println("Current appointment time: " + appointment.getTime());
                 System.out.println("Enter the new appointment time (HH:MM):");
                 String newTime = scanner.nextLine();
 
@@ -147,7 +149,7 @@ public class AppointmentService {
         String patientName = scanner.nextLine();
 
         // Remove the appointment if found
-        boolean removed = appointments.removeIf(app -> app.getPatientName().equals(patientName));
+        boolean removed = appointments.removeIf(app -> app.getPatientName().equalsIgnoreCase(patientName));
         if (removed) {
             // Save changes to file
             saveAppointmentsToFile(); 

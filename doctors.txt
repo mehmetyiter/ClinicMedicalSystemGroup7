@@ -8,4 +8,4 @@ Ava,Anderson,2005-11-11,2035-11-11,Obstetrics and Gynecology
 Noah,Thompson,2010-12-12,2040-12-12,Ophthalmology
 Mia,Rodriguez,2015-01-01,2045-01-01,Psychiatry
 Xie,Yunting,2000-01-01,2020-03-03,Cardiology
-Elena,John,2000-01-01,2008-01-01,Cardiology
+elen,john,2000-01-01,1997-01-01,cardio

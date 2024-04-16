@@ -58,7 +58,7 @@ public class PatientService {
 
         for (Patient patient : patients) {
             if (patient.getFirstName().equalsIgnoreCase(firstName) && patient.getLastName().equalsIgnoreCase(lastName)) {
-                System.out.println("Modifying details for: " + patient);
+                System.out.println("Modifying details for: " + patient.getFirstName() + " " + patient.getLastName());
                 System.out.println("Enter new first name (current: " + patient.getFirstName() + "):");
                 patient.setFirstName(scanner.nextLine());
                 System.out.println("Enter new last name (current: " + patient.getLastName() + "):");
