@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class TreatmentService {
     private static List<Treatment> treatments = new ArrayList<>();
-
     static {
         loadTreatmentsFromFile(); // Load treatment data on startup
     }
@@ -21,13 +20,13 @@ public class TreatmentService {
 
         Doctor doctor = selectDoctor(scanner); // Select a doctor
 
-
         System.out.println("Enter medication:");
         String medication = scanner.nextLine().trim();
         System.out.println("Enter treatment description:");
         String description = scanner.nextLine().trim();
 
-        Treatment treatment = new Treatment(patientName, doctor.getFirstName() + " " + doctor.getLastName(), medication, description);
+        Treatment treatment = new Treatment(patientName, doctor.getFirstName() + " " + doctor.getLastName(), medication,
+                description);
         treatments.add(treatment);
         saveTreatmentsToFile();
         System.out.println("Treatment created successfully!");

@@ -6,13 +6,13 @@ import java.util.Scanner;
 public class AppointmentService {
     // List to store appointments
     private static List<Appointment> appointments = new ArrayList<>();
-       static {
+    static {
         loadAppointmentsFromFile();
     }
 
     // Method to create a new appointment
     public static void createNewAppointment(Scanner scanner) {
-    
+
         System.out.println("Enter patient's first name:");
         String patientFirstName = scanner.nextLine();
         System.out.println("Enter patient's last name:");
@@ -21,13 +21,14 @@ public class AppointmentService {
         if (doctor == null) {
             return;
         }
-    
+
         System.out.println("Enter appointment date (YYYY-MM-DD):");
         String date = scanner.nextLine();
         System.out.println("Enter appointment time (HH:MM):");
         String time = scanner.nextLine();
-    
-        Appointment appointment = new Appointment(patientFirstName, patientLastName, doctor.getFirstName() + " " + doctor.getLastName(), date, time);
+
+        Appointment appointment = new Appointment(patientFirstName, patientLastName,
+                doctor.getFirstName() + " " + doctor.getLastName(), date, time);
         appointments.add(appointment);
         saveAppointmentsToFile(); // Save changes to file
         System.out.println("Appointment scheduled successfully!");
@@ -35,25 +36,25 @@ public class AppointmentService {
 
     // Method to select a doctor from the list of available doctors
     private static Doctor selectDoctor(Scanner scanner) {
-        List<Doctor> doctors = DoctorService.getDoctors();  // Get the list of doctors from DoctorService
+        List<Doctor> doctors = DoctorService.getDoctors(); // Get the list of doctors from DoctorService
         if (doctors.isEmpty()) {
             System.out.println("No doctors available.");
             return null;
         }
-        
+
         System.out.println("Select a doctor:");
         for (int i = 0; i < doctors.size(); i++) {
             Doctor doc = doctors.get(i);
             System.out.printf("%d. Dr. %s %s - %s\n", i + 1, doc.getFirstName(), doc.getLastName(), doc.getSpecialty());
         }
-    
+
         System.out.println("Enter the number of the doctor:");
         int choice = Integer.parseInt(scanner.nextLine()); // Read the choice as an integer
         if (choice < 1 || choice > doctors.size()) {
             System.out.println("Invalid selection.");
             return null;
         }
-    
+
         return doctors.get(choice - 1); // Return the selected doctor
     }
 
@@ -84,8 +85,8 @@ public class AppointmentService {
             if (appointment.getPatientName().equalsIgnoreCase(patientName)) {
                 System.out.println("--------------------------------------");
                 System.out.printf("Patient Name: %s\nDoctor Name: %s\nDate: %s\nTime: %s\n\n",
-                                  appointment.getPatientName(), appointment.getDoctorName(),
-                                  appointment.getDate(), appointment.getTime());
+                        appointment.getPatientName(), appointment.getDoctorName(),
+                        appointment.getDate(), appointment.getTime());
                 System.out.println("--------------------------------------\n");
                 found = true;
             }
@@ -105,8 +106,8 @@ public class AppointmentService {
             if (appointment.getDoctorName().equalsIgnoreCase(doctorName)) {
                 System.out.println("--------------------------------------");
                 System.out.printf("Patient Name: %s\nDoctor Name: %s\nDate: %s\nTime: %s\n\n",
-                                  appointment.getPatientName(), appointment.getDoctorName(),
-                                  appointment.getDate(), appointment.getTime());
+                        appointment.getPatientName(), appointment.getDoctorName(),
+                        appointment.getDate(), appointment.getTime());
                 System.out.println("--------------------------------------\n");
                 found = true;
             }
@@ -135,7 +136,7 @@ public class AppointmentService {
                 appointment.setDate(newDate);
                 appointment.setTime(newTime);
                 // Save changes to file
-                saveAppointmentsToFile(); 
+                saveAppointmentsToFile();
                 System.out.println("Appointment modified successfully!");
                 return;
             }
@@ -152,7 +153,7 @@ public class AppointmentService {
         boolean removed = appointments.removeIf(app -> app.getPatientName().equalsIgnoreCase(patientName));
         if (removed) {
             // Save changes to file
-            saveAppointmentsToFile(); 
+            saveAppointmentsToFile();
             System.out.println("Appointment deleted successfully!");
         } else {
             System.out.println("Appointment not found!");
@@ -165,9 +166,9 @@ public class AppointmentService {
             for (Appointment appointment : appointments) {
                 // Write appointment details to file
                 writer.println(appointment.getPatientName() + "," +
-                               appointment.getDoctorName() + "," +
-                               appointment.getDate() + "," +
-                               appointment.getTime());
+                        appointment.getDoctorName() + "," +
+                        appointment.getDate() + "," +
+                        appointment.getTime());
             }
             System.out.println("Appointments saved to file successfully!");
         } catch (IOException e) {
@@ -188,7 +189,8 @@ public class AppointmentService {
                         String patientFirstName = fullName.length > 0 ? fullName[0] : "";
                         String patientLastName = fullName.length > 1 ? fullName[1] : "";
                         // Initialize Appointment with split first and last names
-                        Appointment appointment = new Appointment(patientFirstName, patientLastName, data[1], data[2], data[3]);
+                        Appointment appointment = new Appointment(patientFirstName, patientLastName, data[1], data[2],
+                                data[3]);
                         appointments.add(appointment);
                     }
                 }
@@ -197,5 +199,5 @@ public class AppointmentService {
             }
         }
     }
-    
+
 }
